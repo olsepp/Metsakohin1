@@ -1,0 +1,124 @@
+.offer-wrapper {
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    padding: 2rem;
+}
+
+.offer {
+    background: rgba(246, 246, 246, 0.75);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    width: 90%;
+}
+
+.offer-card h1 {
+    font-family: "Bebas Neue", sans-serif;
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.input-area form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1; /* Adjust to evenly distribute fields */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input, .form-group textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-family: "Josefin Sans", sans-serif;
+    background: var(--white);
+    transition: border 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: seagreen;
+    background: #fff;
+}
+
+textarea {
+    resize: none;
+}
+
+.send {
+    margin-top: 1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem;
+    background: var(--main-color);
+    color: var(--white);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+.send:hover {
+    background: var(--white);
+    color: var(--main-color);
+}
+
+@media (max-width: 850px) {
+    .offer {
+        padding: 1.5rem;
+    }
+
+    .offer-card h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .send {
+        font-size: 1rem;
+    }
+}
+
+.field {
+    color: #555;
+    margin-top: .5rem;
+}
+
+.notification {
+    position: fixed;
+    top: 200px; /* Adjust to be just below the header */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--main-color); /* Success green */
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 1rem;
+    display: none; /* Initially hidden */
+    z-index: 1000;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

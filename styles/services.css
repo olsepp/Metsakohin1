@@ -1,0 +1,97 @@
+
+
+body {
+    min-height: 200vh;
+    background-color: var(--white);
+}
+
+
+.service-item {
+    padding: 4rem;
+    display: flex;
+    height: auto;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 3rem;
+    gap: 6rem;
+    background-color: var(--white);
+    color: var(--text-color);
+}
+
+@media (max-width: 850px) {
+    .service-item {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 3rem;
+    }
+}
+
+.service-item img {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+}
+
+@media (max-width: 850px) {
+    .service-item img {
+        width: 85%;
+    }
+}
+
+.service-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-text h1 {
+    font-family: "Bebas Neue", sans-serif;
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    font-size: 3vw;
+    margin-bottom: .5rem;
+}
+
+@media (max-width: 850px) {
+    .service-text h1 {
+        font-size: 6vw;
+    }
+}
+
+.service-text p {
+    font-family: "Josefin Sans", sans-serif;
+    line-height: 1.8vw;
+    font-size: 1.4vw;
+}
+
+
+@media (max-width: 850px) {
+    .service-text p {
+        font-size: 4.5vw;
+        line-height: 5vw;
+    }
+}
+
+.service-item a {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.3vw;
+    text-decoration: none;
+    background: var(--main-color);
+    color: var(--white);
+    border-radius: 2rem;
+    width: max-content;
+    padding: 1rem;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+
+@media (max-width: 850px) {
+    .service-item a {
+        font-size: 4vw;
+    }
+}
+
+.service-item a:hover {
+    background: var(--white);
+    color: var(--main-color);
+}
