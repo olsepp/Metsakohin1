@@ -31,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->isSMTP();  // Set mailer to use SMTP
                 $mail->Host = 'smtp.gmail.com';  // Set the SMTP server to send through
                 $mail->SMTPAuth = true;  // Enable SMTP authentication
-                $mail->Username = 'noreplymetsakohin@gmail.com';  // SMTP username
-                $mail->Password = 'MetsaKohin23#M';  // SMTP password
+                $mail->Username = '';  // SMTP username
+                $mail->Password = '';  // SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
                 $mail->Port = 587;  // TCP port to connect to
 
                 //Recipients
-                $mail->setFrom('noreplymetsakohin@gmail.com', 'Pakkumine');
-                $mail->addAddress('oliversepp48@gmail.com', 'Oliver Sepp');  // Add a recipient
+                $mail->setFrom('example@gmail.com', 'Name');
+                $mail->addAddress('example@gmail.com', 'Name');  // Add a recipient
 
                 // Content
                 $mail->isHTML(true);  // Set email format to HTML
