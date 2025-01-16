@@ -30,7 +30,7 @@
             <div class="service-text">
                 <h1>Ostame metsakinnistuid</h1>
                 <p>
-                    Ostame metsa koos maaga kõigis Eesti maakondades, pakkudes metsaomanikele usaldusväärset ja ausat koostööd. Meie eesmärk on hoolitseda metsade eest vastutustundlikult ning viia ellu uue põlvkonna metsanduse visioon, mis ühendab jätkusuutlikkuse ja looduse hoidmise. Teie mets on meie tulevik!
+                    Ostame metsa koos maaga kõigis Eesti maakondades, pakkudes metsaomanikele usaldusväärset ja ausat koostööd. Meie eesmärk on hoolitseda metsade eest vastutustundlikult ning viia ellu uue põlvkonna metsanduse visioon, mis ühendab jätkusuutlikkuse ja looduse hoidmise.
                 </p>
                 <br>
                 <a href="offer.php">Küsi pakkumist</a>

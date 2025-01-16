@@ -80,7 +80,7 @@ textarea {
 }
 
 .send:hover {
-    background: var(--white);
+    background: #fff;
     color: var(--main-color);
 }
 
