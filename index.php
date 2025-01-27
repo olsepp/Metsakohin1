@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="content-area" id="section-about">
+    <div class="content-area">
         <div class="accomplishments">
             <img src="eee/eee_2013.png" alt="Eesti Edukas Ettevõte 2013">
             <img src="eee/eee_2014.png" alt="Eesti Edukas Ettevõte 2014">
@@ -38,7 +38,7 @@
             <img src="eee/EEET_2018-2022.png" alt="Eesti Edukas Ettevõte 2018-2022">
             <img src="eee/EEET_2024.png" alt="Eesti Edukas Ettevõte 2024">
         </div>
-        <div class="about-area">
+        <div class="about-area" id="section-about">
             <img class="traktor" src="traktor.jpg" alt="">
             <div class="about-text">
                 <h1>ETTEVÕTTEST</h1>

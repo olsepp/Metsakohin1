@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="content-contacts">
+    <div class="content-contacts" id="section-contact">
         <div class="contacts-main">
             <h1>Meie inimesed</h1>
             <div class="contacts-people">

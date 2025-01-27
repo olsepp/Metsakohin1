@@ -15,49 +15,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lisainfo = htmlspecialchars($_POST['lisainfo'], ENT_QUOTES, 'UTF-8');
 
 
-    if (!$email) {
-        $message = "Palun sisestage kehtiv e-posti aadress!";
+    if (empty($name) || !$email || empty($phone)) {
+        $message = "Palun sisestage kohustuslikud andmed";
     }
-    else {
-        $data = "$name;$email;$phone;$katastrinumber;$hinnasoov;$lisainfo\n";
 
-        $file = 'customers.txt';
-        if (file_put_contents($file, $data, FILE_APPEND)) {
-            $message = "Saadetud!";
+    $mail = new PHPMailer(true);
+    try {
+        //Server settings
+        $mail->isSMTP();  // Set mailer to use SMTP
+        $mail->Host = 'smtp.zone.eu';  // Set the SMTP server to send through
+        $mail->SMTPAuth = true;  // Enable SMTP authentication
+        $mail->Username = 'info@metsakohin.ee';  // SMTP username
+        $mail->Password = '';  // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+        $mail->Port = 587;  // TCP port to connect to
 
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->isSMTP();  // Set mailer to use SMTP
-                $mail->Host = 'smtp.gmail.com';  // Set the SMTP server to send through
-                $mail->SMTPAuth = true;  // Enable SMTP authentication
-                $mail->Username = '';  // SMTP username
-                $mail->Password = '';  // SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-                $mail->Port = 587;  // TCP port to connect to
+        //Recipients
+        $mail->setFrom('info@metskohin.ee', 'Veebilehelt');
+        $mail->addAddress('example@gmail.com', 'Name');  // Add a recipient
 
-                //Recipients
-                $mail->setFrom('example@gmail.com', 'Name');
-                $mail->addAddress('example@gmail.com', 'Name');  // Add a recipient
+        // Content
+        $mail->isHTML();  // Set email format to HTML
+        $mail->Subject = 'Pakkumine lehelt metsakohin.ee';
+        $mail->Body    = 'Name: ' . $name . '<br>Email: ' . $email . '<br>Phone: ' . $phone . '<br>Katastrinumber: ' . $katastrinumber . '<br>Lisainfo: ' . $lisainfo;
+        $mail->AltBody = 'This is the plain-text version of the email content.';
 
-                // Content
-                $mail->isHTML(true);  // Set email format to HTML
-                $mail->Subject = 'Pakkumine lehelt metsakohin.ee';
-                $mail->Body    = 'Name: ' . $name . '<br>Email: ' . $email . '<br>Phone: ' . $phone . '<br>Katastrinumber: ' . $katastrinumber . '<br>Lisainfo: ' . $lisainfo;
-                $mail->AltBody = 'This is the plain-text version of the email content.';
-
-                $mail->send();
-                echo 'Message has been sent';
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-
-        }
-        elseif (empty($name) || empty($email) || empty($phone)) {
-            $message = "Täitke kohustuslikud väljad!";
-        } else {
-            $message = "Ilmnes viga, proovi uuesti!";
-        }
+        $mail->send();
+        $message = 'Saadetud!';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
+        $message = "Ilmnes viga, proovi uuesti!";
     }
 }
 ?>
@@ -93,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
         </div>
     </div>
-    <div class="content-area" id="section-about">
+    <div class="content-area" id="section-offer">
         <div class="offer-wrapper">
             <div class="offer">
                 <div class="offer-card">

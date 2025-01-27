@@ -35,16 +35,16 @@
 }
 
 
-.logos:before {
-    left: 0;
-    background: linear-gradient(to left, transparent, var(--white));
-}
+/*.logos:before {*/
+/*    left: 0;*/
+/*    background: linear-gradient(to left, transparent, var(--white));*/
+/*}*/
 
-.logos:after {
-    right: 0;
-    background: linear-gradient(to right, transparent, var(--white));
+/*.logos:after {*/
+/*    right: 0;*/
+/*    background: linear-gradient(to right, transparent, var(--white));*/
 
-}
+/*}*/
 
 .logos:hover .logos-slide {
     animation-play-state: paused;
