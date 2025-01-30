@@ -398,28 +398,36 @@ body:not(.no-css) .content-area {
 }
 
 .footer {
+    background-image: radial-gradient(circle, rgba(150, 150, 150, 0.8) 10%, transparent 10%);
+    background-size: 20px 20px;
     background-color: var(--footer-color);
+    color: var(--text-color);
     width: 100%;
     height: auto;
     display: flex;
     padding: 2em;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-content {
+    text-align: left;
+    line-height: 2rem;
 }
 
 .footer-content p {
-    line-height: 1.1vw;
+    line-height: 1.2vw;
 }
 
 .footer-content p, .footer-content h3 {
-    text-align: center;
+    text-align: left;
     font-size: 1vw;
 }
 
 .footer img {
     height: 6vw;
+    margin-bottom: 2rem;
 }
 
 @media (max-width: 850px) {
@@ -431,4 +439,24 @@ body:not(.no-css) .content-area {
     .footer img {
         height: 5rem;
     }
+}
+
+.footer-contact {
+    padding: 2rem;
+    font-size: 1.2vw;
+    line-height: 2rem;
+}
+
+.footer-contact h2 {
+    margin-bottom: 1rem;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.footer-contact a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
 }

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metsakohin OU</title>
+    <title>Metsakohin OÜ</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/partners.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +44,7 @@
             <div class="about-text">
                 <h1>ETTEVÕTTEST</h1>
                 <p>
-                    OÜ Metsakohin on Eesti omanikele kuuluv ettevõte, mis on tegutsenud metsamajanduse valdkonnas alates 2003. aastast. Meie südameasjaks on metsade heaperemehelik ja jätkusuutlik majandamine. Pakume metsakinnistute ostu ning tegeleme ka kasvava metsa raieõiguse omandamisega, pakkudes metsaomanikele usaldusväärset ja hoolivat koostööd.
+                    OÜ Metsakohin on Eesti omanikele kuuluv ettevõte, mis on tegutsenud metsamajanduse valdkonnas alates 2003. aastast. Meie südameasjaks on metsade heaperemehelik ja jätkusuutlik majandamine. Ostame metsakinnistuid ning tegeleme ka kasvava metsa raieõiguste ostuga, pakkudes metsaomanikele usaldusväärset koostööd.
                 </p>
                 <br>
                 <p>
@@ -59,11 +60,11 @@
                 </a>
             </div>
         </div>
-        <div class="sponsor-area">
+        <div class="sponsor-area" id="section-support">
             <div class="sponsor-text">
                 <h1>Toetame kohalikku sporti</h1>
                 <p>
-                    Ettevõte toetab kohalikke spordialasid, pakkudes ressurssi ja tuge kogukonna spordivõistkondadele. Nende eesmärk on edendada tervislikku eluviisi ning aidata noortel sportlastel oma potentsiaali täielikult realiseerida.
+                    Ettevõte toetab kohalikke spordialasid, pakkudes ressurssi ja tuge kogukonna spordivõistkondadele ja võistlustele. Nende eesmärk on edendada tervislikku eluviisi ning aidata noortel sportlastel oma potentsiaali täielikult realiseerida.
                 </p>
                 <br>
                 <p>
@@ -85,5 +86,10 @@
         </div>
         <?php include 'footer.php' ?>
     </div>
+    <script>
+        window.onload = function() {
+            document.getElementById("section-about").scrollIntoView({ behavior: "smooth" });
+        };
+    </script>
 </body>
 </html>

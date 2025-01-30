@@ -24,18 +24,20 @@ body {
     .service-item {
         flex-direction: column;
         gap: 2rem;
-        padding: 3rem;
+        padding: 0;
+        text-align: center;
     }
 }
 
 .service-item img {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border-radius: 20px;
+    width: 50%;
 }
 
 @media (max-width: 850px) {
     .service-item img {
-        width: 85%;
+        width: 90%;
     }
 }
 

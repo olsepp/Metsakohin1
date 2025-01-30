@@ -25,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();  // Set mailer to use SMTP
         $mail->Host = 'smtp.zone.eu';  // Set the SMTP server to send through
         $mail->SMTPAuth = true;  // Enable SMTP authentication
-        $mail->Username = 'info@metsakohin.ee';  // SMTP username
+        $mail->Username = '';  // SMTP username
         $mail->Password = '';  // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
         $mail->Port = 587;  // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('info@metskohin.ee', 'Veebilehelt');
-        $mail->addAddress('example@gmail.com', 'Name');  // Add a recipient
+        $mail->setFrom('info@metsakohin.ee', 'Veebilehelt');
+        $mail->addAddress('info@metsakohin.ee', 'Metsakohin');  // Add a recipient
 
         // Content
         $mail->isHTML();  // Set email format to HTML
@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->send();
         $message = 'Saadetud!';
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
         $message = "Ilmnes viga, proovi uuesti!";
     }
 }

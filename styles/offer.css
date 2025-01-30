@@ -85,6 +85,10 @@ textarea {
 }
 
 @media (max-width: 850px) {
+    .offer-wrapper{
+        padding: 1rem;
+    }
+
     .offer {
         padding: 1.5rem;
     }

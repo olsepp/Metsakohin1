@@ -38,12 +38,19 @@
                     <p>
                         +372 5032325
                     </p>
-                    <a href="mailto:sepp@metsakohin.ee">
-                        sepp@metsakohin.ee
-                    </a>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let user = "&#115;&#101;&#112;&#112;";
+                            let domain = "&#109;&#101;&#116;&#115;&#97;&#107;&#111;&#104;&#105;&#110;&#46;&#101;&#101;";
+                            let email = user + "&#64;" + domain;
+                            document.getElementById("email-link-1").innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
+                        });
+                    </script>
+                    <span id="email-link-1">See e-posti aadress on spämmirobotite eest kaitstud. Selle nägemiseks peab su veebilehitsejas olema JavaSkript sisse lülitatud.</span>
                     <p>
                         Haridus: Tootmis- ja transporditehnika insener (Tallinna Tehnikaülikool)
                     </p>
+                    <br>
                     <p>
                         Metsatöö kogemus üle 20 aasta.
                     </p>
@@ -59,9 +66,15 @@
                     <p>
                         +372 5210507
                     </p>
-                    <a href="mailto:silja@metsakohin.ee">
-                        silja@metsakohin.ee
-                    </a>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let user = "&#115;&#105;&#108;&#106;&#97;";
+                            let domain = "&#109;&#101;&#116;&#115;&#97;&#107;&#111;&#104;&#105;&#110;&#46;&#101;&#101;";
+                            let email = user + "&#64;" + domain;
+                            document.getElementById("email-link-2").innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
+                        });
+                    </script>
+                    <span id="email-link-2">See e-posti aadress on spämmirobotite eest kaitstud. Selle nägemiseks peab su veebilehitsejas olema JavaSkript sisse lülitatud.</span>
                     <p>
                         Haridus: tehnika-teaduste bakalaureus ja loodusteaduste magister (Tallinna Tehnikaülikool)
                     </p>
@@ -77,12 +90,19 @@
                     <p>
                         +372 5131533
                     </p>
-                    <a href="mailto:tanel@metsakohin.ee">
-                        tanel@metsakohin.ee
-                    </a>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let user = "&#116;&#97;&#110;&#101;&#108;";
+                            let domain = "&#109;&#101;&#116;&#115;&#97;&#107;&#111;&#104;&#105;&#110;&#46;&#101;&#101;";
+                            let email = user + "&#64;" + domain;
+                            document.getElementById("email-link-3").innerHTML = '<a href="mailto:' + email + '">' + email + '</a>';
+                        });
+                    </script>
+                    <span id="email-link-3">See e-posti aadress on spämmirobotite eest kaitstud. Selle nägemiseks peab su veebilehitsejas olema JavaSkript sisse lülitatud.</span>
                     <p>
                         Haridus: Metsatööstuse eriala (Eesti Maaülikool)
                     </p>
+                    <br>
                     <p>
                         Metsandusega tegelenud ca 20 aastat
                     </p>
