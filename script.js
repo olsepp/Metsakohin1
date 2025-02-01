@@ -65,3 +65,49 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.querySelectorAll('.menu-link2').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+
+        const targetId = this.getAttribute('data-target');
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+document.querySelectorAll('.menu-link2').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+
+        const targetId = this.getAttribute('data-target');
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+window.onload = function() {
+    if (window.innerWidth < 850) {
+        document.getElementById("section-about").scrollIntoView({ behavior: "smooth" });
+    } else {
+        document.getElementById("section-awards").scrollIntoView({ behavior: "smooth" });
+    }
+};
+
+window.onload = function() {
+    // Get the hash from the URL (e.g., #section-about)
+    const hash = window.location.hash;
+
+    if (hash) {
+        setTimeout(() => {
+            document.querySelector(hash).scrollIntoView({ behavior: "smooth" });
+        }, 100); // Slight delay to ensure the page is ready
+    }
+};
+
+

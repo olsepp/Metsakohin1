@@ -398,65 +398,65 @@ body:not(.no-css) .content-area {
 }
 
 .footer {
-    background-image: radial-gradient(circle, rgba(150, 150, 150, 0.8) 10%, transparent 10%);
-    background-size: 20px 20px;
     background-color: var(--footer-color);
     color: var(--text-color);
+    padding: 3rem 2rem;
     width: 100%;
-    height: auto;
+}
+
+.footer-container {
     display: flex;
-    padding: 2em;
-    flex-direction: row;
-    gap: 2rem;
     justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.footer-content {
-    text-align: left;
-    line-height: 2rem;
+.footer-logo, .footer-contact, .footer-links {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1.5rem;
 }
 
-.footer-content p {
-    line-height: 1.2vw;
-}
-
-.footer-content p, .footer-content h3 {
-    text-align: left;
-    font-size: 1vw;
-}
-
-.footer img {
-    height: 6vw;
-    margin-bottom: 2rem;
-}
-
-@media (max-width: 850px) {
-    .footer p, .footer h3 {
-        font-size: 2.5vw;
-        line-height: 4.5vw;
-    }
-
-    .footer img {
-        height: 5rem;
-    }
-}
-
-.footer-contact {
-    padding: 2rem;
-    font-size: 1.2vw;
-    line-height: 2rem;
-}
-
-.footer-contact h2 {
+.footer-logo img {
+    max-width: 180px;
     margin-bottom: 1rem;
-    font-family: "Bebas Neue", sans-serif;
 }
 
-.footer-contact a {
+.footer h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
     color: var(--text-color);
-    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Bebas Neue", sans-serif;
+    border-bottom: 2px solid var(--text-color);
+    width: fit-content;
 }
 
-.footer-contact a:hover {
-    text-decoration: underline;
+.footer p, .footer a {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.footer a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--white);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+    color: var(--text-color);
 }

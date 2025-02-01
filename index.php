@@ -28,7 +28,7 @@
     </div>
 
     <div class="content-area">
-        <div class="accomplishments">
+        <div class="accomplishments" id="section-awards">
             <img src="eee/eee_2013.png" alt="Eesti Edukas Ettevõte 2013">
             <img src="eee/eee_2014.png" alt="Eesti Edukas Ettevõte 2014">
             <img src="eee/eee_2015.png" alt="Eesti Edukas Ettevõte 2015">
@@ -86,10 +86,5 @@
         </div>
         <?php include 'footer.php' ?>
     </div>
-    <script>
-        window.onload = function() {
-            document.getElementById("section-about").scrollIntoView({ behavior: "smooth" });
-        };
-    </script>
 </body>
 </html>
