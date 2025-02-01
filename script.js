@@ -91,13 +91,16 @@ document.querySelectorAll('.menu-link2').forEach(link => {
     });
 });
 
-window.onload = function() {
-    if (window.innerWidth < 850) {
-        document.getElementById("section-about").scrollIntoView({ behavior: "smooth" });
-    } else {
-        document.getElementById("section-awards").scrollIntoView({ behavior: "smooth" });
-    }
-};
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => { // Small delay to ensure elements are available
+        if (window.innerWidth < 850) {
+            document.getElementById("section-about")?.scrollIntoView({ behavior: "smooth" });
+        } else {
+            document.getElementById("section-awards")?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, 100); // 100ms delay to ensure smooth execution
+});
+
 
 window.onload = function() {
     // Get the hash from the URL (e.g., #section-about)
