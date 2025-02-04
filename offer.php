@@ -1,54 +1,3 @@
-<?php
-require 'vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-$message = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
-    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-    $phone = htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8');
-    $katastrinumber = htmlspecialchars($_POST['katastrinumber'], ENT_QUOTES, 'UTF-8');
-    $hinnasoov = htmlspecialchars($_POST['hinnasoov'], ENT_QUOTES, 'UTF-8');
-    $lisainfo = htmlspecialchars($_POST['lisainfo'], ENT_QUOTES, 'UTF-8');
-
-
-    if (empty($name) || !$email || empty($phone)) {
-        $message = "Palun sisestage kohustuslikud andmed";
-    }
-
-    $mail = new PHPMailer(true);
-    try {
-        //Server settings
-        $mail->isSMTP();  // Set mailer to use SMTP
-        $mail->Host = 'smtp.zone.eu';  // Set the SMTP server to send through
-        $mail->SMTPAuth = true;  // Enable SMTP authentication
-        $mail->Username = '';  // SMTP username
-        $mail->Password = '';  // SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-        $mail->Port = 587;  // TCP port to connect to
-
-        //Recipients
-        $mail->setFrom('info@metsakohin.ee', 'Veebilehelt');
-        $mail->addAddress('info@metsakohin.ee', 'Metsakohin');  // Add a recipient
-
-        // Content
-        $mail->isHTML();  // Set email format to HTML
-        $mail->Subject = 'Pakkumine lehelt metsakohin.ee';
-        $mail->Body    = 'Name: ' . $name . '<br>Email: ' . $email . '<br>Phone: ' . $phone . '<br>Katastrinumber: ' . $katastrinumber . '<br>Lisainfo: ' . $lisainfo;
-        $mail->AltBody = 'This is the plain-text version of the email content.';
-
-        $mail->send();
-        $message = 'Saadetud!';
-    } catch (Exception $e) {
-        $message = "Ilmnes viga, proovi uuesti!";
-    }
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,15 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <script src="script.js"></script>
     <script src="bg-change.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            let form = document.getElementById("offer-form");
+            if (form) {
+                form.submit();
+            } else {
+                console.error("Form not found.");
+            }
+        }
+    </script>
 </head>
 <body class="no-css">
     <div class="opening">
 
         <?php include 'header-nav.html'?>
 
-        <?php if ($message): ?>
-            <div class="notification" id="notification"><?php echo htmlspecialchars($message); ?></div>
-        <?php endif; ?>
+        <div id="notification" style="display: none;"></div>
 
         <div class="opening-text">
             Küsi pakkumist
@@ -85,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="offer-card">
                     <h1>Küsige pakkumist</h1>
                     <div class="input-area">
-                        <form method="post" action="">
+                        <form id="offer-form" method="post" action="">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Nimi*</label>
@@ -115,7 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4"></textarea>
                                 <p class="field">* - kohustuslik väli</p>
                             </div>
-                            <button type="submit" name="send" class="send">Saada</button>
+                            <button type="submit" name="send" class="send g-recaptcha"
+                                    data-sitekey="6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"
+                                    data-callback="onSubmit"
+                                    data-action="send">Saada</button>
                         </form>
                     </div>
                 </div>
@@ -124,14 +85,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include 'footer.php' ?>
     </div>
     <script>
-        // Display notification for 5 seconds if present
         const notification = document.getElementById('notification');
         if (notification) {
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 5000); // Hide after 5 seconds
+            }, 5000);
         }
+    </script>
+    <script>
+        document.getElementById("offer-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch("verification.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    let notification = document.getElementById("notification");
+                    notification.style.display = "block";
+                    notification.textContent = data.message;
+                    notification.style.backgroundColor = data.success ? "green" : "red";
+                })
+                .catch(error => console.error("Error:", error));
+        });
     </script>
 </body>
 </html>

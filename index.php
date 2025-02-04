@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Metsakohin, Metsa, Kohin, metsakohin, mets, müük, ost" />
+    <meta name="description" content="Metsakohin OÜ" />
     <title>Metsakohin OÜ</title>
     <link rel="icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="styles/index.css">
