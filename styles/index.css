@@ -204,7 +204,7 @@ body:not(.no-css) .content-area {
     gap: 4rem;
     background-color: var(--white);
     color: #333333;
-    margin-bottom: 6rem;
+    /*margin-bottom: 6rem;*/
 }
 
 @media (max-width: 850px) {

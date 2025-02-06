@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <script src="script.js"></script>
-    <script src="bg-change.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
         function onSubmit(token) {
@@ -28,7 +26,7 @@
 
         <?php include 'header-nav.html'?>
 
-        <div id="notification" style="display: none;"></div>
+        <div id="notification" class="notification" style="display: none;"></div>
 
         <div class="opening-text">
             Küsi pakkumist
@@ -43,7 +41,7 @@
                 <div class="offer-card">
                     <h1>Küsige pakkumist</h1>
                     <div class="input-area">
-                        <form id="offer-form" method="post" action="">
+                        <form id="offer-form" method="post" action="verification.php">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Nimi*</label>
@@ -85,16 +83,7 @@
         <?php include 'footer.php' ?>
     </div>
     <script>
-        const notification = document.getElementById('notification');
-        if (notification) {
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 5000);
-        }
-    </script>
-    <script>
-        document.getElementById("offer-form").addEventListener("submit", function(e) {
+        document.getElementById("offer-form").addEventListener("submit", function (e) {
             e.preventDefault();
 
             let formData = new FormData(this);
@@ -109,9 +98,16 @@
                     notification.style.display = "block";
                     notification.textContent = data.message;
                     notification.style.backgroundColor = data.success ? "green" : "red";
+
+                    // Hide the notification after 5 seconds
+                    setTimeout(() => {
+                        notification.style.display = "none";
+                    }, 5000);
                 })
                 .catch(error => console.error("Error:", error));
         });
     </script>
+    <script src="script.js"></script>
+    <script src="bg-change.js"></script>
 </body>
 </html>

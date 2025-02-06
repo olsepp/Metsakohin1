@@ -69,8 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $response["success"] = true;
         $response["message"] = "Saadetud!";
 
-
+        header('Content-Type: application/json');
         echo json_encode($response);
+        exit;
+
     } else {
         $response["success"] = false;
         $response["message"] = "Captcha verification failed!";
