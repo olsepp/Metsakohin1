@@ -1,11 +1,5 @@
 <?php
 session_start();
-if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-    $success = $_SESSION['success'];
-    unset($_SESSION['message']);  // Clear the session message
-    unset($_SESSION['success']);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +30,24 @@ if (isset($_SESSION['message'])) {
         <?php include 'header-nav.html'?>
 
         <div id="notification" class="notification" style="display: none;"></div>
+
+        <?php
+        if (isset($_SESSION['message'])) {
+            $message = $_SESSION['message'];
+            $success = $_SESSION['success'];
+            // Set notification background color based on success
+            $bgColor = $success ? "green" : "red";
+            echo "<script>
+                document.getElementById('notification').textContent = '$message';
+                document.getElementById('notification').style.display = 'block';
+                document.getElementById('notification').style.backgroundColor = '$bgColor';
+              </script>";
+
+            // Clear session variables so the message does not show after a refresh
+            unset($_SESSION['message']);
+            unset($_SESSION['success']);
+        }
+        ?>
 
         <div class="opening-text">
             Küsi pakkumist
@@ -92,29 +104,13 @@ if (isset($_SESSION['message'])) {
         <?php include 'footer.php' ?>
     </div>
     <script>
-        document.getElementById("offer-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            let formData = new FormData(this);
-
-            fetch("verification.php", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    let notification = document.getElementById("notification");
-                    notification.style.display = "block";
-                    notification.textContent = "<?php echo $message; ?>;
-                    notification.style.backgroundColor = "<?php echo $success ? 'green' : 'red'; ?>";
-
-                    // Hide the notification after 5 seconds
-                    setTimeout(() => {
-                        notification.style.display = "none";
-                    }, 5000);
-                })
-                .catch(error => console.error("Error:", error));
-        });
+        // Auto-hide notification after 5 seconds
+        setTimeout(() => {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.style.display = 'none';
+            }
+        }, 5000);
     </script>
     <script src="script.js"></script>
     <script src="bg-change.js"></script>
