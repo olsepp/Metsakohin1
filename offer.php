@@ -111,6 +111,13 @@ session_start();
                 notification.style.display = 'none';
             }
         }, 5000);
+
+        if (document.getElementById('notification').style.display === 'block') {
+            const form = document.getElementById('offer-form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
     </script>
     <script src="script.js"></script>
     <script src="bg-change.js"></script>
