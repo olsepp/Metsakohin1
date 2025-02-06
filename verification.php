@@ -66,12 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //
 //        fclose($smtp_conn);
 
-        $response["success"] = true;
-        $response["message"] = "Saadetud!";
-
-        header('Content-Type: application/json');
-        echo json_encode($response);
-
+        $_SESSION["success"] = true;
+        $_SESSION["message"] = "Saadetud!";
 
     } else {
         $response["success"] = false;
