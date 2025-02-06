@@ -113,7 +113,7 @@ session_start();
         }, 5000);
 
         if (document.getElementById('notification').style.display === 'block') {
-            const form = document.getElementById('offer-form');
+            const form = document.getElementById('content-area');
             if (form) {
                 form.scrollIntoView({ behavior: 'smooth' });
             }
