@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    $success = $_SESSION['success'];
+    unset($_SESSION['message']);  // Clear the session message
+    unset($_SESSION['success']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,8 +105,8 @@
                 .then(data => {
                     let notification = document.getElementById("notification");
                     notification.style.display = "block";
-                    notification.textContent = data.message;
-                    notification.style.backgroundColor = data.success ? "green" : "red";
+                    notification.textContent = "<?php echo $message; ?>;
+                    notification.style.backgroundColor = "<?php echo $success ? 'green' : 'red'; ?>";
 
                     // Hide the notification after 5 seconds
                     setTimeout(() => {

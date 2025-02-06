@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header('Content-Type: application/json');
         echo json_encode($response);
-        exit;
+
 
     } else {
         $response["success"] = false;
@@ -79,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // reCAPTCHA not verified. Do not send email, show error message
     }
+    header("Location:offer.php");
+    exit;
 }
 
 
