@@ -1,11 +1,19 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 session_start();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $recaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
-    $recaptchaSecret = "6Leh38kqAAAAAAOfYMIqBs8KjQGuyxXu68IGhkRI";
+    $recaptchaSecret = $_ENV["CAPTCHA_SECRET"];
     $recaptchaResponse = $_POST['g-recaptcha-response'];
 
     $recaptcha = file_get_contents($recaptchaUrl . "?secret=" . $recaptchaSecret
@@ -23,51 +31,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hinnasoov = htmlspecialchars(trim($_POST['hinnasoov']), ENT_QUOTES, 'UTF-8');
         $lisainfo = htmlspecialchars(trim($_POST['lisainfo']), ENT_QUOTES, 'UTF-8');
 
-//        $smtp_host = "smtp.zone.eu"; // Change to your SMTP server
-//        $smtp_username = "your_email@yourdomain.com"; // Your SMTP username
-//        $smtp_password = "your_password"; // Your SMTP password
-//        $smtp_port = 587; // Usually 465 (SSL) or 587 (TLS)
-//
-//        // Email Content
-//        $to = "info@metsakohin.ee";
-//        $subject = "Pakkumine lehelt metsakohin.ee";
-//        $message_body = "
-//    Nimi: $name
-//    Email: $email
-//    Telefon: $phone
-//    Katastrinumber: $katastrinumber
-//    Hinnasoov: $hinnasoov
-//    Lisainfo: $lisainfo
-//    ";
-//
-//        // Headers
-//        $headers = "From: " . $smtp_username . "\r\n";
-//        $headers .= "Reply-To: " . $email . "\r\n";
-//        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-//
-//        // Send email using SMTP (fsockopen)
-//        $smtp_conn = fsockopen($smtp_host, $smtp_port, $errorCode, $errorMessage, 30);
+        if (!$email) {
+            $response["success"] = false;
+            $response["message"] = 'Invalid email address!';
+            header("Location:offer.php");
+            exit;
+        }
 
-//        if (!$smtp_conn) {
-//            $response["message"] = "Ei saanud SMTP serveriga ühendust: $errorMessage ($errorCode)";
-//            echo json_encode($response);
-//            exit;
-//        }
-//
-//        fputs($smtp_conn, "EHLO " . $_SERVER['SERVER_NAME'] . "\r\n");
-//        fputs($smtp_conn, "AUTH LOGIN\r\n");
-//        fputs($smtp_conn, base64_encode($smtp_username) . "\r\n");
-//        fputs($smtp_conn, base64_encode($smtp_password) . "\r\n");
-//        fputs($smtp_conn, "MAIL FROM: <$smtp_username>\r\n");
-//        fputs($smtp_conn, "RCPT TO: <$to>\r\n");
-//        fputs($smtp_conn, "DATA\r\n");
-//        fputs($smtp_conn, "Subject: $subject\r\n$headers\r\n$message_body\r\n.\r\n");
-//        fputs($smtp_conn, "QUIT\r\n");
-//
-//        fclose($smtp_conn);
+        $mail = new PHPMailer(true);
 
-        $_SESSION["success"] = true;
-        $_SESSION["message"] = "Saadetud!";
+        try {
+            //Server settings
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = $_ENV['SMTP_HOST'];                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = $_ENV['SMTP_USERNAME'];                     //SMTP username
+            $mail->Password   = $_ENV['SMTP_PASSWORD'];                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+            $mail->Port       = $_ENV['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom($_ENV['MAIL_FROM'], 'Veebileht');
+            $mail->addAddress($_ENV['MAIL_TO'], 'Veebileht');     //Add a recipient
+            $mail->addReplyTo($email);
+
+            //Content
+            $mail->isHTML();                                  //Set email format to HTML
+            $mail->Subject = 'Pakkumine lehelt metsakohin.ee';
+            $mail->Body    = "
+        <strong>Nimi:</strong> $name <br>
+        <strong>Email:</strong> $email <br>
+        <strong>Telefon:</strong> $phone <br>
+        <strong>Katastrinumber:</strong> $katastrinumber <br>
+        <strong>Hinnasoov:</strong> $hinnasoov <br>
+        <strong>Lisainfo:</strong> $lisainfo";
+
+            $mail->AltBody = "
+            Nimi: {$name}
+            Email: {$email}
+            Telefon: {$phone}
+            Katastrinumber: {$katastrinumber}
+            Hinnasoov: {$hinnasoov}
+            Lisainfo: {$lisainfo}";
+
+            $mail->send();
+
+            $_SESSION["success"] = true;
+            $_SESSION["message"] = "Saadetud!";
+
+        } catch (Exception $e) {
+
+            $response["success"] = false;
+            $response["message"] = "Captcha verification failed!";
+        }
+
+
 
     } else {
         $response["success"] = false;
