@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } catch (Exception $e) {
 
             $response["success"] = false;
-            $response["message"] = "Captcha verification failed!";
+            $response["message"] = "Email sending failed!";
         }
 
 
