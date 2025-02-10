@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt</title>
+    <meta name="keywords" content="Metsakohin, Metsa, Kohin, metsakohin, mets, müük, ost" />
+    <meta name="description" content="Metsakohin OÜ" />
+    <title>Metsakohin OÜ - Kontakt</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/contacts.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">

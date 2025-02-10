@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et-ee">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="Metsakohin, Metsa, Kohin, metsakohin, mets, müük, ost" />
     <meta name="description" content="Metsakohin OÜ" />
-    <title>Metsakohin OÜ</title>
+    <title>Metsakohin OÜ - Meist</title>
     <link rel="icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/partners.css">
@@ -42,7 +42,7 @@
             <img src="eee/EEET_2024.png" alt="Eesti Edukas Ettevõte 2024">
         </div>
         <div class="about-area" id="section-about">
-            <img class="traktor" src="traktor.jpg" alt="">
+            <img class="traktor" src="traktor.jpg" alt="metsatraktor">
             <div class="about-text">
                 <h1>ETTEVÕTTEST</h1>
                 <p>
@@ -56,7 +56,7 @@
                 <p>
                     Oleme uhked, et alates 2016. aastast on meie tegevus tunnustatud FSC® sertifikaadiga (nr NC-FM/COC-025687), mis kinnitab meie vastutustundlikku ja säästvat lähenemist metsade majandamisel.
                 </p>
-                <img class="hor-logo" src="eee/hor_logo.jpeg" alt="">
+                <img class="hor-logo" src="eee/hor_logo.jpeg" alt="fsc">
                 <a href="cetrificate/Certificate.pdf" class="certificate" target="_blank">
                     Sertifikaat
                 </a>
@@ -78,12 +78,12 @@
                 </p>
             </div>
             <div class="collage">
-                <img src="fenster-pic/fenster2.jpg" alt="">
-                <img src="fenster-pic/fenster3.jpg" alt="">
-                <img src="fenster-pic/fenster4.jpg" alt="">
-                <img src="fenster-pic/fenster5.jpg" alt="">
-                <img src="fenster-pic/fenster6.jpg" alt="">
-                <img src="fenster-pic/fenster7.jpg" alt="">
+                <img src="fenster-pic/fenster2.jpg" alt="korvpall">
+                <img src="fenster-pic/fenster3.jpg" alt="korvpall">
+                <img src="fenster-pic/fenster4.jpg" alt="korvpall">
+                <img src="fenster-pic/fenster5.jpg" alt="korvpall">
+                <img src="fenster-pic/fenster6.jpg" alt="korvpall">
+                <img src="fenster-pic/fenster7.jpg" alt="korvpall">
             </div>
         </div>
         <?php include 'footer.php' ?>

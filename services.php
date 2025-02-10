@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teenused</title>
+    <meta name="keywords" content="Metsakohin, Metsa, Kohin, metsakohin, mets, müük, ost" />
+    <meta name="description" content="Metsakohin OÜ" />
+    <title>Metsakohin OÜ - Teenused</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/services.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +28,7 @@
     </div>
     <div class="content-area" id="section-services">
         <div class="service-item">
-            <img src="service-media/handshake.jfif" alt="">
+            <img src="service-media/handshake.jfif" alt="ostame">
             <div class="service-text">
                 <h1>Ostame metsakinnistuid</h1>
                 <p>
@@ -37,7 +39,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/axe.jpeg" alt="">
+            <img src="service-media/axe.jpeg" alt="raieõigus">
             <div class="service-text">
                 <h1>Ostame kasvava metsa raieõigust</h1>
                 <p>
@@ -48,7 +50,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/axe.jpeg" alt="">
+            <img src="service-media/axe.jpeg" alt="maamõõtmine">
             <div class="service-text">
                 <h1>Aitame maamõõdutööde korraldamisel</h1>
                 <p>
@@ -59,7 +61,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/handshake.jfif" alt="">
+            <img src="service-media/handshake.jfif" alt="metsamajandus">
             <div class="service-text">
                 <h1>Metsamajanduskavade koostamine</h1>
                 <p>
@@ -70,7 +72,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/handshake.jfif" alt="">
+            <img src="service-media/handshake.jfif" alt="müük">
             <div class="service-text">
                 <h1>Abistame müügiga kaasneval asjaajamisel</h1>
                 <p>

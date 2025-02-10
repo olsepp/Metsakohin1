@@ -32,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lisainfo = htmlspecialchars(trim($_POST['lisainfo']), ENT_QUOTES, 'UTF-8');
 
         if (!$email) {
-            $response["success"] = false;
-            $response["message"] = 'Invalid email address!';
+            $_SESSION["success"] = false;
+            $_SESSION["message"] = 'Kehtetu e-post!';
             header("Location:offer.php");
             exit;
         }
@@ -81,15 +81,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         } catch (Exception $e) {
 
-            $response["success"] = false;
-            $response["message"] = "Email sending failed!";
+            $_SESSION["success"] = false;
+            $_SESSION["message"] = "Midagi läks valesti!";
         }
 
 
 
     } else {
-        $response["success"] = false;
-        $response["message"] = "Captcha verification failed!";
+        $_SESSION["success"] = false;
+        $_SESSION["message"] = "Captcha verification failed!";
 
         // reCAPTCHA not verified. Do not send email, show error message
     }
