@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 
 session_start();
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->addReplyTo($email);
 
             //Content
-            $mail->isHTML();                                  //Set email format to HTML
+            $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Pakkumine lehelt metsakohin.ee';
             $mail->Body    = "
         <strong>Nimi:</strong> $name <br>
