@@ -29,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
         $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
         $phone = htmlspecialchars(trim($_POST['phone']), ENT_QUOTES, 'UTF-8');
-        $katastrinumber = htmlspecialchars(trim($_POST['katastrinumber']), ENT_QUOTES, 'UTF-8');
-        $hinnasoov = htmlspecialchars(trim($_POST['hinnasoov']), ENT_QUOTES, 'UTF-8');
-        $lisainfo = htmlspecialchars(trim($_POST['lisainfo']), ENT_QUOTES, 'UTF-8');
+        $katastrinumber = htmlspecialchars(trim($_POST['katastrinumber']), ENT_QUOTES, 'UTF-8') ?? '';
+        $hinnasoov = htmlspecialchars(trim($_POST['hinnasoov']), ENT_QUOTES, 'UTF-8') ?? '';
+        $lisainfo = htmlspecialchars(trim($_POST['lisainfo']), ENT_QUOTES, 'UTF-8') ?? '';
 
         if (!$email) {
             $_SESSION["success"] = false;
@@ -86,8 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["success"] = false;
             $_SESSION["message"] = "Midagi läks valesti!";
         }
-
-
 
     } else {
         $_SESSION["success"] = false;
