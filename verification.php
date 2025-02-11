@@ -14,8 +14,6 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    print_r($_ENV);
-
     $recaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
     $recaptchaSecret = $_ENV["CAPTCHA_SECRET"];
     $recaptchaResponse = $_POST['g-recaptcha-response'];
