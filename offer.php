@@ -34,7 +34,7 @@ session_start();
         <div id="notification" class="notification" style="display: none;"></div>
 
         <?php
-        if (isset($_SESSION['message'])) {
+        if (isset($_SESSION['message']) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'verification.php') !== false) {
             $message = $_SESSION['message'];
             $success = $_SESSION['success'];
             // Set notification background color based on success
