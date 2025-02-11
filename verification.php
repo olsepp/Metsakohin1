@@ -45,18 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = $_ENV['SMTP_HOST'];                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = $_ENV['SMTP_USERNAME'];                     //SMTP username
-            $mail->Password   = $_ENV['SMTP_PASSWORD'];                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = $_ENV['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->isSMTP();
+            $mail->SMTPAuth   = true;
+
+            $mail->Host       = $_ENV['SMTP_HOST'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = $_ENV['SMTP_PORT'];
+
+            $mail->Username   = $_ENV['SMTP_USERNAME'];
+            $mail->Password   = $_ENV['SMTP_PASSWORD'];
 
             //Recipients
-            $mail->setFrom($_ENV['MAIL_FROM'], 'Veebileht');
-            $mail->addAddress($_ENV['MAIL_TO'], 'Veebileht');     //Add a recipient
-            $mail->addReplyTo($email);
+            $mail->setFrom($email, $name);
+            $mail->addAddress($_ENV['MAIL_TO'], 'Veebileht');
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
@@ -70,12 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <strong>Lisainfo:</strong> $lisainfo";
 
             $mail->AltBody = "
-            Nimi: {$name}
-            Email: {$email}
-            Telefon: {$phone}
-            Katastrinumber: {$katastrinumber}
-            Hinnasoov: {$hinnasoov}
-            Lisainfo: {$lisainfo}";
+            Nimi: $name
+            Email: $email
+            Telefon: $phone
+            Katastrinumber: $katastrinumber
+            Hinnasoov: $hinnasoov
+            Lisainfo: $lisainfo";
 
             $mail->send();
 

@@ -38,7 +38,7 @@ session_start();
             $message = $_SESSION['message'];
             $success = $_SESSION['success'];
             // Set notification background color based on success
-            $bgColor = $success ? "green" : "red";
+            $bgColor = $message ? "green" : "red";
             echo "<script>
                 document.getElementById('notification').textContent = '$message';
                 document.getElementById('notification').style.display = 'block';
