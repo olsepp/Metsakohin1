@@ -36,55 +36,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!$email) {
             $_SESSION["success"] = false;
             $_SESSION["message"] = 'Kehtetu e-post!';
-            header("Location:offer.php");
+            header("Location: offer.php");
             exit;
         }
 
-        $mail = new PHPMailer(true);
+// Email recipient
+        $to = $_ENV['MAIL_TO'];
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            $mail->isSMTP();
-            $mail->SMTPAuth   = true;
+// Email subject
+        $subject = 'Pakkumine lehelt metsakohin.ee';
 
-            $mail->Host       = $_ENV['SMTP_HOST'];
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = $_ENV['SMTP_PORT'];
+// Email headers
+        $headers = "From: $email\r\n";
+        $headers .= "Reply-To: $email\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-            $mail->Username   = $_ENV['SMTP_USERNAME'];
-            $mail->Password   = $_ENV['SMTP_PASSWORD'];
+// Email body
+        $body = "
+    <strong>Nimi:</strong> $name <br>
+    <strong>Email:</strong> $email <br>
+    <strong>Telefon:</strong> $phone <br>
+    <strong>Katastrinumber:</strong> $katastrinumber <br>
+    <strong>Hinnasoov:</strong> $hinnasoov <br>
+    <strong>Lisainfo:</strong> $lisainfo";
 
-            //Recipients
-            $mail->setFrom($email, $name);
-            $mail->addAddress($_ENV['MAIL_TO'], 'Veebileht');
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Pakkumine lehelt metsakohin.ee';
-            $mail->Body    = "
-        <strong>Nimi:</strong> $name <br>
-        <strong>Email:</strong> $email <br>
-        <strong>Telefon:</strong> $phone <br>
-        <strong>Katastrinumber:</strong> $katastrinumber <br>
-        <strong>Hinnasoov:</strong> $hinnasoov <br>
-        <strong>Lisainfo:</strong> $lisainfo";
-
-            $mail->AltBody = "
-            Nimi: $name
-            Email: $email
-            Telefon: $phone
-            Katastrinumber: $katastrinumber
-            Hinnasoov: $hinnasoov
-            Lisainfo: $lisainfo";
-
-            $mail->send();
-
+// Send email
+        if (mail($to, $subject, $body, $headers)) {
             $_SESSION["success"] = true;
             $_SESSION["message"] = "Saadetud!";
-
-        } catch (Exception $e) {
-
+        } else {
             $_SESSION["success"] = false;
             $_SESSION["message"] = "Midagi läks valesti!";
         }
