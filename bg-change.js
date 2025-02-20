@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const openingDiv = document.querySelector(".opening");
 
     if (openingDiv) {
-        const bgImages = ["styles/logs-bg.jpg", "styles/background.jpg", "styles/form-bg-new.jpg"];
+        const bgImages = ["styles/bg3.jpg", "styles/background.jpg", "styles/form-bg-new.jpg"];
         let index = 0;
 
         const changeBackground = () => {

@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/axe.jpeg" alt="raieõigus">
+            <img src="traktor.jpg" alt="raieõigus">
             <div class="service-text">
                 <h1>Ostame kasvava metsa raieõigust</h1>
                 <p>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/axe.jpeg" alt="maamõõtmine">
+            <img src="service-media/maamõõtmine.jpg" alt="maamõõtmine">
             <div class="service-text">
                 <h1>Aitame maamõõdutööde korraldamisel</h1>
                 <p>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/handshake.jfif" alt="metsamajandus">
+            <img src="service-media/kava.jpg" alt="metsamajanduskava">
             <div class="service-text">
                 <h1>Metsamajanduskavade koostamine</h1>
                 <p>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/handshake.jfif" alt="müük">
+            <img src="service-media/müük.jpg" alt="müük">
             <div class="service-text">
                 <h1>Abistame müügiga kaasneval asjaajamisel</h1>
                 <p>
