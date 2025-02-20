@@ -60,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <strong>Hinnasoov:</strong> $hinnasoov <br>
     <strong>Lisainfo:</strong> $lisainfo";
 
-// Send email
         if (mail($to, $subject, $body, $headers)) {
             $_SESSION["success"] = true;
             $_SESSION["message"] = "Saadetud!";
