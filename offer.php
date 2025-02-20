@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,25 +28,31 @@ session_start();
 
         <?php include 'header-nav.html'?>
 
-        <div id="notification" class="notification" style="display: none;"></div>
-
         <?php
-        if (isset($_SESSION['message']) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'verification.php') !== false) {
-            $message = $_SESSION['message'];
-            $success = $_SESSION['success'];
-            // Set notification background color based on success
-            $bgColor = $message ? "green" : "red";
-            echo "<script>
-                document.getElementById('notification').textContent = '$message';
-                document.getElementById('notification').style.display = 'block';
-                document.getElementById('notification').style.backgroundColor = '$bgColor';
-              </script>";
+        $message = "";
+        $bgColor = "";
 
-            // Clear session variables so the message does not show after a refresh
-            unset($_SESSION['message']);
-            unset($_SESSION['success']);
+        if (isset($_GET['email'])) {
+            if ($_GET['email'] == 'sent') {
+                $message = "Saadetud!";
+                $bgColor = "seagreen";
+            } else {
+                $message = "Midagi läks valesti!";
+                $bgColor = "red";
+            }
+        } elseif (isset($_GET['captcha']) && $_GET['captcha'] == 'failed') {
+            $message = "Captcha verification failed.";
+            $bgColor = "red";
+        }
+
+        if (!empty($message)) {
+            echo "<div id='notification' style='display: block; background-color: $bgColor; padding: 10px; color: white; text-align: center;'>
+            $message
+          </div>";
         }
         ?>
+
+
 
         <div class="opening-text">
             Küsi pakkumist
@@ -106,21 +109,24 @@ session_start();
         <?php include 'footer.php' ?>
     </div>
     <script>
-        // Auto-hide notification after 5 seconds
-        setTimeout(() => {
-            const notification = document.getElementById('notification');
-            if (notification) {
-                notification.style.display = 'none';
-            }
-        }, 5000);
+        document.addEventListener("DOMContentLoaded", function () {
+            const notification = document.getElementById("notification");
 
-        if (document.getElementById('notification').style.display === 'block') {
-            const form = document.getElementById('section-offer');
-            if (form) {
-                form.scrollIntoView({ behavior: 'smooth' });
+            if (notification) {
+                // Scroll to the form section
+                const form = document.getElementById("section-offer");
+                if (form) {
+                    form.scrollIntoView({ behavior: "smooth" });
+                }
+
+                // Auto-hide notification after 5 seconds
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 5000);
             }
-        }
+        });
     </script>
+
     <script src="script.js"></script>
     <script src="bg-change.js"></script>
 </body>

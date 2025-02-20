@@ -1,16 +1,9 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
-session_start();
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -61,18 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <strong>Lisainfo:</strong> $lisainfo";
 
         if (mail($to, $subject, $body, $headers)) {
-            $_SESSION["success"] = true;
-            $_SESSION["message"] = "Saadetud!";
+            header("Location: offer.php?email=sent");
         } else {
-            $_SESSION["success"] = false;
-            $_SESSION["message"] = "Midagi läks valesti!";
+            header("Location: offer.php?email=failed");
         }
 
     } else {
-        $_SESSION["success"] = false;
-        $_SESSION["message"] = "Captcha verification failed!";
-
-        // reCAPTCHA not verified. Do not send email, show error message
+        header("Location: offer.php?captcha=failed");
     }
     header("Location:offer.php");
     exit;
