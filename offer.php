@@ -52,8 +52,6 @@
         }
         ?>
 
-
-
         <div class="opening-text">
             Küsi pakkumist
             <p>

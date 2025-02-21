@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!$email) {
             $_SESSION["success"] = false;
             $_SESSION["message"] = 'Kehtetu e-post!';
-            header("Location: offer.php");
+            header("Location: offer.php#section-offer");
             exit;
         }
 
@@ -54,15 +54,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mail($to, $subject, $body, $headers)) {
             header("Location: offer.php?email=sent");
+            exit;
         } else {
             header("Location: offer.php?email=failed");
+            exit;
         }
 
     } else {
         header("Location: offer.php?captcha=failed");
+        exit;
     }
-    header("Location:offer.php");
-    exit;
 }
 
 
