@@ -84,5 +84,14 @@
         </div>
         <?php include 'footer.php' ?>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("section-services");
+            if (form) {
+                form.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+    </script>
 </body>
 </html>

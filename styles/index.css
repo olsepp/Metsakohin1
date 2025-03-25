@@ -87,6 +87,19 @@ body {
     z-index: 100;
 }
 
+#notification {
+    display: block;
+    font-family: "Bebas Neue", sans-serif;
+    position: fixed;
+    top: 60px; /* Adjust based on your header height */
+    z-index: 1000;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 2rem;
+    color: white;
+}
+
 .header.scrolled {
     background-color: var(--main-color);
 }

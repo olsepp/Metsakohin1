@@ -29,27 +29,36 @@
         <?php include 'header-nav.html'?>
 
         <?php
+        session_start();
+
         $message = "";
         $bgColor = "";
+        $formData = [];
+        $messageType = "";
 
-        if (isset($_GET['email'])) {
-            if ($_GET['email'] == 'sent') {
-                $message = "Saadetud!";
-                $bgColor = "seagreen";
-            } else {
-                $message = "Midagi läks valesti!";
-                $bgColor = "red";
-            }
-        } elseif (isset($_GET['captcha']) && $_GET['captcha'] == 'failed') {
-            $message = "Captcha verification failed.";
-            $bgColor = "red";
+        if (isset($_SESSION['form_data'])) {
+            $formData = $_SESSION['form_data'];
+        }
+
+        if (isset($_SESSION['message'])) {
+            $message = $_SESSION['message']['text'];
+            $messageType = $_SESSION['message']['type'];
+            $bgColor = $messageType === "success" ? "seagreen" : "red";
         }
 
         if (!empty($message)) {
-            echo "<div id='notification' style='display: block; background-color: $bgColor; padding: 10px; color: white; text-align: center;'>
+            echo "<div id='notification' style='background-color: $bgColor;'>
             $message
           </div>";
         }
+
+        if ($messageType === 'success') {
+            unset($_SESSION['form_data']);
+            $formData = [];
+        }
+
+        // Clear the message after displaying
+        unset($_SESSION['message']);
         ?>
 
         <div class="opening-text">
@@ -69,30 +78,42 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Nimi*</label>
-                                    <input type="text" id="name" name="name" placeholder="Sisestage oma nimi" required>
+                                    <input type="text" id="name" name="name"
+                                           placeholder="Sisestage oma nimi" required
+                                            value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post*</label>
-                                    <input type="email" id="email" name="email" placeholder="Sisestage oma e-post" required>
+                                    <input type="email" id="email" name="email"
+                                           placeholder="Sisestage oma e-post" required
+                                            value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="phone">Telefon*</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="Sisestage oma telefoninumber" required>
+                                    <input type="tel" id="phone" name="phone"
+                                           placeholder="Sisestage oma telefoninumber" required
+                                            value="<?php echo isset($formData['phone']) ? htmlspecialchars($formData['phone']) : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="katastrinumber">Katastrinumber</label>
-                                    <input type="text" id="katastrinumber" name="katastrinumber" placeholder="Sisestage katastrinumber">
+                                    <input type="text" id="katastrinumber" name="katastrinumber"
+                                           placeholder="Sisestage katastrinumber"
+                                            value="<?php echo isset($formData['katastrinumber']) ? htmlspecialchars($formData['katastrinumber']) : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="hinnasoov">Hinnasoov</label>
-                                <input type="text" id="hinnasoov" name="hinnasoov" placeholder="Sisestage hinnasoov">
+                                <input type="text" id="hinnasoov" name="hinnasoov"
+                                       placeholder="Sisestage hinnasoov"
+                                        value="<?php echo isset($formData['hinnasoov']) ? htmlspecialchars($formData['hinnasoov']) : ''; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="lisainfo">Lisainfo</label>
-                                <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4"></textarea>
+                                <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4">
+                                    <?php echo isset($formData['lisainfo']) ? htmlspecialchars($formData['lisainfo']) : ''; ?>
+                                </textarea>
                                 <p class="field">* - kohustuslik väli</p>
                             </div>
                             <button type="submit" name="send" class="send g-recaptcha"
@@ -121,6 +142,12 @@
                 setTimeout(() => {
                     notification.style.display = "none";
                 }, 5000);
+            }
+            else {
+                const form = document.getElementById("section-offer");
+                if (form) {
+                    form.scrollIntoView({ behavior: "smooth" });
+                }
             }
         });
     </script>
