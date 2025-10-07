@@ -87,6 +87,21 @@ body {
     z-index: 100;
 }
 
+#notification {
+    position: fixed;
+    top: 130px; /* Adjust to be just below the header */
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 1rem;
+    display: block; /* Initially hidden */
+    z-index: 1000;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .header.scrolled {
     background-color: var(--main-color);
 }

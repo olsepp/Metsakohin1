@@ -115,5 +115,14 @@
 
     <?php include 'footer.php' ?>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("section-contact");
+            if (form) {
+                form.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+    </script>
+
 </body>
 </html>

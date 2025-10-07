@@ -114,18 +114,3 @@ textarea {
     margin-top: .5rem;
 }
 
-.notification {
-    position: fixed;
-    top: 200px; /* Adjust to be just below the header */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--main-color); /* Success green */
-    color: var(--white);
-    padding: 10px 20px;
-    border-radius: 1rem;
-    display: none; /* Initially hidden */
-    z-index: 1000;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 3rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}

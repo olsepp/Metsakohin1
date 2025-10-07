@@ -31,24 +31,37 @@ session_start();
 
         <?php include 'header-nav.html'?>
 
-        <div id="notification" class="notification" style="display: none;"></div>
-
         <?php
-        if (isset($_SESSION['message']) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'verification.php') !== false) {
-            $message = $_SESSION['message'];
-            $success = $_SESSION['success'];
-            // Set notification background color based on success
-            $bgColor = $message ? "green" : "red";
-            echo "<script>
-                document.getElementById('notification').textContent = '$message';
-                document.getElementById('notification').style.display = 'block';
-                document.getElementById('notification').style.backgroundColor = '$bgColor';
-              </script>";
+        session_start();
 
-            // Clear session variables so the message does not show after a refresh
-            unset($_SESSION['message']);
-            unset($_SESSION['success']);
+        $message = "";
+        $bgColor = "";
+        $formData = [];
+        $messageType = "";
+
+        if (isset($_SESSION['form_data'])) {
+            $formData = $_SESSION['form_data'];
         }
+
+        if (isset($_SESSION['message'])) {
+            $message = $_SESSION['message']['text'];
+            $messageType = $_SESSION['message']['type'];
+            $bgColor = $messageType === "success" ? "seagreen" : "red";
+        }
+
+        if (!empty($message)) {
+            echo "<div id='notification' style='background-color: $bgColor;'>
+            $message
+          </div>";
+        }
+
+        if ($messageType === 'success') {
+            unset($_SESSION['form_data']);
+            $formData = [];
+        }
+
+        // Clear the message after displaying
+        unset($_SESSION['message']);
         ?>
 
         <div class="opening-text">
@@ -68,30 +81,40 @@ session_start();
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Nimi*</label>
-                                    <input type="text" id="name" name="name" placeholder="Sisestage oma nimi" required>
+                                    <input type="text" id="name" name="name"
+                                           placeholder="Sisestage oma nimi" required
+                                            value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post*</label>
-                                    <input type="email" id="email" name="email" placeholder="Sisestage oma e-post" required>
+                                    <input type="email" id="email" name="email"
+                                           placeholder="Sisestage oma e-post" required
+                                            value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="phone">Telefon*</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="Sisestage oma telefoninumber" required>
+                                    <input type="tel" id="phone" name="phone"
+                                           placeholder="Sisestage oma telefoninumber" required
+                                            value="<?php echo isset($formData['phone']) ? htmlspecialchars($formData['phone']) : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="katastrinumber">Katastrinumber</label>
-                                    <input type="text" id="katastrinumber" name="katastrinumber" placeholder="Sisestage katastrinumber">
+                                    <input type="text" id="katastrinumber" name="katastrinumber"
+                                           placeholder="Sisestage katastrinumber"
+                                            value="<?php echo isset($formData['katastrinumber']) ? htmlspecialchars($formData['katastrinumber']) : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="hinnasoov">Hinnasoov</label>
-                                <input type="text" id="hinnasoov" name="hinnasoov" placeholder="Sisestage hinnasoov">
+                                <input type="text" id="hinnasoov" name="hinnasoov"
+                                       placeholder="Sisestage hinnasoov"
+                                        value="<?php echo isset($formData['hinnasoov']) ? htmlspecialchars($formData['hinnasoov']) : ''; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="lisainfo">Lisainfo</label>
-                                <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4"></textarea>
+                                <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4"><?php echo isset($formData['lisainfo']) ? htmlspecialchars($formData['lisainfo']) : ''; ?></textarea>
                                 <p class="field">* - kohustuslik väli</p>
                             </div>
                             <button type="submit" name="send" class="send g-recaptcha"
@@ -106,21 +129,30 @@ session_start();
         <?php include 'footer.php' ?>
     </div>
     <script>
-        // Auto-hide notification after 5 seconds
-        setTimeout(() => {
-            const notification = document.getElementById('notification');
-            if (notification) {
-                notification.style.display = 'none';
-            }
-        }, 5000);
+        document.addEventListener("DOMContentLoaded", function () {
+            const notification = document.getElementById("notification");
 
-        if (document.getElementById('notification').style.display === 'block') {
-            const form = document.getElementById('section-offer');
-            if (form) {
-                form.scrollIntoView({ behavior: 'smooth' });
+            if (notification) {
+                // Scroll to the form section
+                const form = document.getElementById("section-offer");
+                if (form) {
+                    form.scrollIntoView({ behavior: "smooth" });
+                }
+
+                // Auto-hide notification after 5 seconds
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 5000);
             }
-        }
+            else {
+                const form = document.getElementById("section-offer");
+                if (form) {
+                    form.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
     </script>
+
     <script src="script.js"></script>
     <script src="bg-change.js"></script>
 </body>

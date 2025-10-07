@@ -1,16 +1,31 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+session_start();
 
-require 'vendor/autoload.php';
+$_SESSION['form_data'] = [
+    'name' => $_POST['name'] ?? '',
+    'email' => $_POST['email'] ?? '',
+    'phone' => $_POST['phone'] ?? '',
+    'katastrinumber' => $_POST['katastrinumber'] ?? '',
+    'hinnasoov' => $_POST['hinnasoov'] ?? '',
+    'lisainfo' => $_POST['lisainfo'] ?? ''
+];
+
+require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-session_start();
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$phone = trim($_POST['phone'] ?? '');
 
+
+if (empty($name) || empty($email) || empty($phone)) {
+    $_SESSION['message'] = ['type' => 'error', 'text' => 'Täitke kohutuslikud väljad!'];
+    header("Location: offer.php");
+    exit;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -34,8 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lisainfo = htmlspecialchars(trim($_POST['lisainfo']), ENT_QUOTES, 'UTF-8') ?? '';
 
         if (!$email) {
-            $_SESSION["success"] = false;
-            $_SESSION["message"] = 'Kehtetu e-post!';
+            $_SESSION['message'] = ['type' => 'error', 'text' => 'Sisestage kehtiv e-post!'];
             header("Location: offer.php");
             exit;
         }
@@ -61,28 +75,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <strong>Lisainfo:</strong> $lisainfo";
 
         if (mail($to, $subject, $body, $headers)) {
-            $_SESSION["success"] = true;
-            $_SESSION["message"] = "Saadetud!";
+            $_SESSION['message'] = ['type' => 'success', 'text' => 'Saadetud!'];
+            unset($_SESSION['form_data']);
+            header("Location: offer.php");
+            exit;
         } else {
-            $_SESSION["success"] = false;
-            $_SESSION["message"] = "Midagi läks valesti!";
+            $_SESSION['message'] = ['type' => 'error', 'text' => 'Midagi läks valesti!'];
+            header("Location: offer.php");
+            exit;
         }
 
     } else {
-        $_SESSION["success"] = false;
-        $_SESSION["message"] = "Captcha verification failed!";
-
-        // reCAPTCHA not verified. Do not send email, show error message
+        $_SESSION['message'] = ['type' => 'error', 'text' => 'Captcha failed!'];
+        header("Location: offer.php");
+        exit;
     }
-    header("Location:offer.php");
-    exit;
 }
-
-
-
-
-
-
-
-
-
