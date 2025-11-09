@@ -32,10 +32,11 @@ body {
 }
 
 .opening {
+    margin-top: 8vw;
     display: flex;
     background-size: cover;
     background-position: center;
-    min-height: 100vh;
+    height: 200px;
     justify-content: left;
     align-items: center;
     text-align: left;
@@ -43,31 +44,23 @@ body {
 }
 
 .opening-text {
-    width: 50%;
+    width: 100%;
     height: 30%;
     font-family: "Bebas Neue", sans-serif;
     background-color: transparent;
     color: var(--white);
     font-weight: bold;
-    margin-left: 10%;
-    margin-top: 3rem;
-    font-size: 5vw;
+    text-align: center;
+    font-size: 2.2vw;
 }
 
-.opening-text p {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 1.5vw;
-    margin: 0;
-    padding-top: 1.5rem;
-}
+
 
 @media (max-width: 850px) {
     .opening-text {
         font-size: 7vw;
     }
-    .opening-text p {
-        font-size: 4vw;
-    }
+
 }
 
 .header {
@@ -76,7 +69,7 @@ body {
     left: 0;
     width: 100%;
     padding: 20px 100px;
-    background: rgba(46, 139, 87, 0);
+    background: rgba(46, 139, 87, 1);
     display: flex;
     justify-content: space-between;
     align-items: center;

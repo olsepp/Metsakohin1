@@ -5,18 +5,11 @@ window.addEventListener('scroll', function() {
 
     function isMobile() {
         return window.innerWidth <= 850; // Adjust this threshold if necessary
-    }
+     }
 
-    if (!isMobile()) {
-        const maxScroll = 400; // Adjust this value based on when you want the color to be fully applied
-        const scrollY = window.scrollY;
-        const opacity = Math.min(scrollY / maxScroll, 1); // Calculate opacity based on scroll position
-
-        header.style.backgroundColor = `rgba(46, 139, 87, ${opacity})`; // Adjust the color and opacity
-    }
-    else {
-        header.style.backgroundColor = `rgba(46, 139, 87, 1)`;
-    }
+      if (isMobile()) {
+          header.style.backgroundColor = `rgba(46, 139, 87, 1)`;
+     }
 });
 
 

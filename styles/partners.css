@@ -56,6 +56,10 @@
     animation: 20s slide infinite linear;
 }
 
+.logos-slide a {
+    text-decoration: none;
+}
+
 .logos-slide img {
     margin: 0 40px;
     height: 5rem;

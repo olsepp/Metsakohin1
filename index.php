@@ -13,16 +13,11 @@
     <script src="bg-change.js"></script>
 </head>
 <body>
+    <?php include 'header-nav.html'?>
 
     <div class="opening">
-
-        <?php include 'header-nav.html'?>
-
         <div class="opening-text">
-            Sinu usaldusväärne partner metsanduses.
-            <p>
-                Pakume konkurentsivõimelist hinda ning ausat ja kiiret asjaajamist!
-            </p>
+            Sinu usaldusväärne partner metsanduses
         </div>
     </div>
 
