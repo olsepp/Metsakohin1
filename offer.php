@@ -146,6 +146,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 notification.style.display = 'none';
             }, 5000); // Hide after 5 seconds
         }
+
+        window.addEventListener('load', () => {
+            const content = document.querySelector('.content-area');
+            if (content) {
+                // Adjust this number (in pixels) to control how much less it scrolls
+                const scrollOffset = 70; // e.g. scroll 150px less — change as you like
+
+                // Calculate scroll position relative to content area
+                const elementTop = content.getBoundingClientRect().top + window.scrollY;
+
+                // Scroll smoothly to slightly above the element
+                window.scrollTo({
+                    top: elementTop - scrollOffset,
+                    behavior: 'smooth'
+                });
+            }
+        });
     </script>
 </body>
 </html>

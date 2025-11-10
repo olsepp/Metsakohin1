@@ -80,5 +80,24 @@
         </div>
         <?php include 'footer.php' ?>
     </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const content = document.querySelector('.content-area');
+            if (content) {
+                // Adjust this number (in pixels) to control how much less it scrolls
+                const scrollOffset = 70; // e.g. scroll 150px less — change as you like
+
+                // Calculate scroll position relative to content area
+                const elementTop = content.getBoundingClientRect().top + window.scrollY;
+
+                // Scroll smoothly to slightly above the element
+                window.scrollTo({
+                    top: elementTop - scrollOffset,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    </script>
 </body>
 </html>

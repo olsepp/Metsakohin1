@@ -36,7 +36,7 @@ body {
     display: flex;
     background-size: cover;
     background-position: center;
-    height: 200px;
+    height: 100vh;
     justify-content: left;
     align-items: center;
     text-align: left;
@@ -44,14 +44,23 @@ body {
 }
 
 .opening-text {
-    width: 100%;
+    width: 80%;
     height: 30%;
+    margin: auto;
     font-family: "Bebas Neue", sans-serif;
     background-color: transparent;
     color: var(--white);
     font-weight: bold;
-    text-align: center;
-    font-size: 2.2vw;
+    text-align: left;
+    font-size: 3vw;
+}
+
+.opening-text p {
+    font-family: "Bebas Neue", sans-serif;
+    color: var(--white);
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.5vw;
 }
 
 
