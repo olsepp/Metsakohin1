@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Küsi pakkumist</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/offer.css">
+    <link rel="icon" href="icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
