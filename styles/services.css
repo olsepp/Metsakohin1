@@ -7,14 +7,14 @@ body {
 
 
 .service-item {
-    padding: 4rem;
+    padding: 3rem;
     display: flex;
     height: auto;
     width: 80%;
     justify-content: space-between;
     align-items: center;
     text-align: left;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     gap: 6rem;
     background-color: var(--white);
     color: var(--text-color);
@@ -31,6 +31,12 @@ body {
 .service-item img {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 250px;
+    height: auto;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 @media (max-width: 850px) {
@@ -48,7 +54,7 @@ body {
     font-family: "Bebas Neue", sans-serif;
     padding-bottom: 1.5rem;
     padding-top: 1.5rem;
-    font-size: 3vw;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
     margin-bottom: .5rem;
 }
 
@@ -60,8 +66,8 @@ body {
 
 .service-text p {
     font-family: "Josefin Sans", sans-serif;
-    line-height: 1.8vw;
-    font-size: 1.4vw;
+    line-height: clamp(1.3rem, 1.8vw, 1.6rem);
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
 }
 
 
@@ -74,7 +80,7 @@ body {
 
 .service-item a {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 1.3vw;
+    font-size: clamp(0.9rem, 1.3vw, 1.2rem);
     text-decoration: none;
     background: var(--main-color);
     color: var(--white);

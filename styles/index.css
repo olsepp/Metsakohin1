@@ -85,6 +85,17 @@ body {
     z-index: 100;
 }
 
+.header::after {
+    content: '';
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 8vw;
+    background: rgba(46, 139, 87, 1);
+    z-index: -1;
+}
+
 .header.scrolled {
     background-color: var(--main-color);
 }
@@ -399,34 +410,109 @@ body:not(.no-css) .content-area {
     background-color: var(--footer-color);
     width: 100%;
     height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 3em 5em;
+    gap: 3rem;
+    align-items: start;
+}
+
+.footer-section {
     display: flex;
-    padding: 2em;
     flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
+    gap: 1rem;
+}
+
+.footer-left {
+    align-items: flex-start;
+}
+
+.footer-left img {
+    height: 5vw;
+    max-height: 80px;
+    margin-bottom: 1rem;
+}
+
+.footer-content h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(1rem, 1.2vw, 1.3rem);
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
 }
 
 .footer-content p {
-    line-height: 1.1vw;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    line-height: 1.5;
+    color: var(--text-color);
+    margin: 0.2rem 0;
 }
 
-.footer-content p, .footer-content h3 {
-    text-align: center;
-    font-size: 1vw;
+.footer-links h3,
+.footer-contact h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(1.1rem, 1.4vw, 1.5rem);
+    margin-bottom: 1rem;
+    color: var(--text-color);
 }
 
-.footer img {
-    height: 6vw;
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: var(--main-color);
+}
+
+.contact-info p {
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    line-height: 1.8;
+    color: var(--text-color);
+    margin: 0.5rem 0;
+}
+
+.contact-info strong {
+    color: var(--main-color);
 }
 
 @media (max-width: 850px) {
-    .footer p, .footer h3 {
-        font-size: 2.5vw;
-        line-height: 4.5vw;
+    .footer {
+        grid-template-columns: 1fr;
+        padding: 2em;
+        gap: 2rem;
     }
 
-    .footer img {
+    .footer-left {
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-left img {
         height: 5rem;
+    }
+
+    .footer-left .footer-content {
+        text-align: center;
+    }
+
+    .footer-links,
+    .footer-contact {
+        text-align: left;
+    }
+
+    .footer-links ul li {
+        text-align: left;
     }
 }

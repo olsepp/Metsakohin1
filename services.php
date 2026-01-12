@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/axe.jpeg" alt="">
+            <img src="service-media/maamootja.jpg" alt="">
             <div class="service-text">
                 <h1>Aitame maamõõdutööde korraldamisel</h1>
                 <p>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="service-item">
-            <img src="service-media/handshake.jfif" alt="">
+            <img src="service-media/kava.jpeg" alt="">
             <div class="service-text">
                 <h1>Metsamajanduskavade koostamine</h1>
                 <p>

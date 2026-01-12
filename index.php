@@ -59,11 +59,11 @@
             <div class="sponsor-text">
                 <h1>Toetame kohalikku sporti</h1>
                 <p>
-                    Ettevõte toetab kohalikke spordialasid, pakkudes ressurssi ja tuge kogukonna spordivõistkondadele. Nende eesmärk on edendada tervislikku eluviisi ning aidata noortel sportlastel oma potentsiaali täielikult realiseerida.
+                    Ettevõte toetab kohalikke spordialasid, pakkudes ressurssi ja tuge kogukonna spordivõistkondadele. Kelle eesmärk on edendada tervislikku eluviisi ning aidata noortel sportlastel oma potentsiaali täielikult realiseerida.
                 </p>
                 <br>
                 <p>
-                    Sel hooajal oleme Saku II liiga korvpalli meeskonna TalTech/Fenster teine peatoetaja.
+                    Juba teist hooaega järjest oleme Saku II liiga korvpalli meeskonna TalTech BS/Fenster/Metsakohin teine peatoetaja.
                 </p>
                 <br>
                 <p>
