@@ -14,8 +14,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = file_get_contents($verifyURL . '?secret=' . $recaptchaSecret . '&response=' . $recaptchaResponse);
     $responseData = json_decode($response);
     
-    if (!$responseData->success || $responseData->score < 0.5) {
+    // Log reCAPTCHA response for debugging
+    error_log("reCAPTCHA Response: " . print_r($responseData, true));
+    
+    if (!$responseData->success) {
+        $errorCodes = isset($responseData->{'error-codes'}) ? implode(', ', $responseData->{'error-codes'}) : 'unknown error';
+        error_log("reCAPTCHA failed: " . $errorCodes);
         $message = "reCAPTCHA verification failed. Please try again.";
+        $messageType = "error";
+    } elseif (isset($responseData->score) && $responseData->score < 0.5) {
+        error_log("reCAPTCHA score too low: " . $responseData->score);
+        $message = "reCAPTCHA score too low. Please try again.";
         $messageType = "error";
     } else {
         // Sanitize inputs
@@ -140,7 +149,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
     // reCAPTCHA callback function
     function onSubmit(token) {
-        document.getElementById("offerForm").submit();
+        // Add the token to the form
+        const form = document.getElementById("offerForm");
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "g-recaptcha-response";
+        input.value = token;
+        form.appendChild(input);
+        // Submit the form
+        form.submit();
     }
 
     const notification = document.getElementById('notification');
