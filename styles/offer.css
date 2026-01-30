@@ -109,16 +109,37 @@ textarea {
 
 .notification {
     position: fixed;
-    top: 200px; /* Adjust to be just below the header */
+    top: 200px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--main-color); /* Success green */
-    color: var(--white);
-    padding: 10px 20px;
+    padding: 1.5rem 2rem;
     border-radius: 1rem;
-    display: none; /* Initially hidden */
+    display: none;
     z-index: 1000;
     font-family: "Bebas Neue", sans-serif;
-    font-size: 3rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.3s ease;
+    max-width: 90%;
+    text-align: center;
+}
+
+.notification-success {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: 2px solid #1f5f3d;
+}
+
+.notification-error {
+    background-color: #dc2626;
+    color: var(--white);
+    border: 2px solid #991b1b;
+}
+
+@media (max-width: 850px) {
+    .notification {
+        top: 120px;
+        font-size: 1.2rem;
+        padding: 1rem 1.5rem;
+    }
 }
