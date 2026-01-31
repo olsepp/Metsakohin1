@@ -106,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1>Küsige pakkumist</h1>
                 <div class="input-area">
                     <form method="post" action="" id="offerForm">
+                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Nimi*</label>
@@ -135,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4"><?php echo $_POST['lisainfo'] ?? ''; ?></textarea>
                             <p class="field">* - kohustuslik väli</p>
                         </div>
-                        <button type="submit" class="send g-recaptcha"
+                        <button class="send g-recaptcha"
                                 data-sitekey="6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"
                                 data-callback='onSubmit'
                                 data-action='submit'>Saada</button>
@@ -150,14 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // reCAPTCHA callback function
     function onSubmit(token) {
         // Add the token to the form
-        const form = document.getElementById("offerForm");
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = "g-recaptcha-response";
-        input.value = token;
-        form.appendChild(input);
-        // Submit the form
-        form.submit();
+        document.getElementById("offerForm").submit();
     }
 
     const notification = document.getElementById('notification');
