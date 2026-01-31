@@ -8,7 +8,7 @@ $debugInfo = []; // Debug array
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Debug: Check if secret key exists
-    $recaptchaSecret = getenv('CAPTCHA_SECRET');
+    $recaptchaSecret = env('CAPTCHA_SECRET');
     $debugInfo[] = "Secret key exists: " . ($recaptchaSecret ? 'YES' : 'NO');
     $debugInfo[] = "Secret key length: " . ($recaptchaSecret ? strlen($recaptchaSecret) : '0');
 
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $messageType = "error";
             } else {
                 // Send email using mail()
-                $to = getenv('MAIL_TO') ?: 'test@example.com';
+                $to = env('MAIL_TO') ?: 'test@example.com';
                 $subject = 'Uus pakkumise päring - metsakohin.ee';
 
                 $emailBody = "Uus pakkumise päring\n\n";
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $emailBody .= "Lisainfo: " . ($lisainfo ?: 'Ei määratud') . "\n\n";
                 $emailBody .= "Saadetud: " . date('d.m.Y H:i:s') . "\n";
 
-                $headers = "From: " . (getenv('MAIL_FROM') ?: 'noreply@metsakohin.ee') . "\r\n";
+                $headers = "From: " . (env('MAIL_FROM') ?: 'noreply@metsakohin.ee') . "\r\n";
                 $headers .= "Reply-To: $email\r\n";
                 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
