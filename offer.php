@@ -100,15 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="no-css">
 <div class="opening">
     <?php include 'header-nav.html'?>
-    <!-- DEBUG OUTPUT - REMOVE AFTER FIXING -->
-    <?php if (!empty($debugInfo)): ?>
-        <div style="background: #f0f0f0; padding: 20px; margin: 20px; border: 2px solid #ff0000; font-family: monospace; font-size: 12px; text-align: left;">
-            <h3 style="color: #ff0000;">DEBUG INFO (Remove this after fixing):</h3>
-            <?php foreach ($debugInfo as $info): ?>
-                <div><?php echo htmlspecialchars($info); ?></div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
 
     <?php if ($message): ?>
         <div class="notification notification-<?php echo $messageType; ?>" id="notification">
