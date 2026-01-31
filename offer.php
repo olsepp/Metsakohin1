@@ -3,69 +3,81 @@ require 'config/env.php';
 
 $message = "";
 $messageType = "success";
+$debugInfo = []; // Debug array
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Verify reCAPTCHA
+    // Debug: Check if secret key exists
     $recaptchaSecret = getenv('CAPTCHA_SECRET');
+    $debugInfo[] = "Secret key exists: " . ($recaptchaSecret ? 'YES' : 'NO');
+    $debugInfo[] = "Secret key length: " . ($recaptchaSecret ? strlen($recaptchaSecret) : '0');
+
     $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
-    
+    $debugInfo[] = "Token received: " . ($recaptchaResponse ? 'YES (length: ' . strlen($recaptchaResponse) . ')' : 'NO');
+
+    // Verify reCAPTCHA
     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
     $response = file_get_contents($verifyURL . '?secret=' . $recaptchaSecret . '&response=' . $recaptchaResponse);
-    $responseData = json_decode($response);
-    
-    // Log reCAPTCHA response for debugging
-    error_log("reCAPTCHA Response: " . print_r($responseData, true));
-    
-    if (!$responseData->success) {
-        $errorCodes = isset($responseData->{'error-codes'}) ? implode(', ', $responseData->{'error-codes'}) : 'unknown error';
-        error_log("reCAPTCHA failed: " . $errorCodes);
-        $message = "reCAPTCHA verification failed. Please try again.";
-        $messageType = "error";
-    } elseif (isset($responseData->score) && $responseData->score < 0.5) {
-        error_log("reCAPTCHA score too low: " . $responseData->score);
-        $message = "reCAPTCHA score too low. Please try again.";
-        $messageType = "error";
-    } else {
-        // Sanitize inputs
-        $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
-        $email = filter_var($_POST['email'] ?? '', FILTER_VALIDATE_EMAIL);
-        $phone = htmlspecialchars($_POST['phone'] ?? '', ENT_QUOTES, 'UTF-8');
-        $katastrinumber = htmlspecialchars($_POST['katastrinumber'] ?? '', ENT_QUOTES, 'UTF-8');
-        $hinnasoov = htmlspecialchars($_POST['hinnasoov'] ?? '', ENT_QUOTES, 'UTF-8');
-        $lisainfo = htmlspecialchars($_POST['lisainfo'] ?? '', ENT_QUOTES, 'UTF-8');
 
-        // Validate required fields
-        if (empty($name) || !$email || empty($phone)) {
-            $message = "Palun täitke kõik kohustuslikud väljad!";
+    $debugInfo[] = "file_get_contents response: " . ($response === false ? 'FAILED' : 'SUCCESS');
+
+    if ($response !== false) {
+        $responseData = json_decode($response);
+        $debugInfo[] = "JSON decode: " . ($responseData ? 'SUCCESS' : 'FAILED');
+        $debugInfo[] = "Full response: " . print_r($responseData, true);
+
+        if (!$responseData->success) {
+            $errorCodes = isset($responseData->{'error-codes'}) ? implode(', ', $responseData->{'error-codes'}) : 'unknown error';
+            $debugInfo[] = "Error codes: " . $errorCodes;
+            $message = "reCAPTCHA verification failed. Error: " . $errorCodes;
+            $messageType = "error";
+        } elseif (isset($responseData->score) && $responseData->score < 0.5) {
+            $debugInfo[] = "Score too low: " . $responseData->score;
+            $message = "reCAPTCHA score too low: " . $responseData->score;
             $messageType = "error";
         } else {
+            // Sanitize inputs
+            $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
+            $email = filter_var($_POST['email'] ?? '', FILTER_VALIDATE_EMAIL);
+            $phone = htmlspecialchars($_POST['phone'] ?? '', ENT_QUOTES, 'UTF-8');
+            $katastrinumber = htmlspecialchars($_POST['katastrinumber'] ?? '', ENT_QUOTES, 'UTF-8');
+            $hinnasoov = htmlspecialchars($_POST['hinnasoov'] ?? '', ENT_QUOTES, 'UTF-8');
+            $lisainfo = htmlspecialchars($_POST['lisainfo'] ?? '', ENT_QUOTES, 'UTF-8');
 
-            // Send email using mail()
-        $to = getenv('MAIL_TO') ?: 'test@example.com';
-        $subject = 'Uus pakkumise päring - metsakohin.ee';
-
-        $emailBody = "Uus pakkumise päring\n\n";
-        $emailBody .= "Nimi: $name\n";
-        $emailBody .= "E-post: $email\n";
-        $emailBody .= "Telefon: $phone\n";
-        $emailBody .= "Katastrinumber: " . ($katastrinumber ?: 'Ei määratud') . "\n";
-        $emailBody .= "Hinnasoov: " . ($hinnasoov ?: 'Ei määratud') . "\n";
-        $emailBody .= "Lisainfo: " . ($lisainfo ?: 'Ei määratud') . "\n\n";
-        $emailBody .= "Saadetud: " . date('d.m.Y H:i:s') . "\n";
-
-        $headers = "From: " . (getenv('MAIL_FROM') ?: 'noreply@metsakohin.ee') . "\r\n";
-        $headers .= "Reply-To: $email\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-            if (mail($to, $subject, $emailBody, $headers)) {
-                $message = "Täname! Teie päring on edukalt saadetud.";
-                $messageType = "success";
-            } else {
-                $message = "E-kirja saatmine ebaõnnestus.";
+            // Validate required fields
+            if (empty($name) || !$email || empty($phone)) {
+                $message = "Palun täitke kõik kohustuslikud väljad!";
                 $messageType = "error";
+            } else {
+                // Send email using mail()
+                $to = getenv('MAIL_TO') ?: 'test@example.com';
+                $subject = 'Uus pakkumise päring - metsakohin.ee';
+
+                $emailBody = "Uus pakkumise päring\n\n";
+                $emailBody .= "Nimi: $name\n";
+                $emailBody .= "E-post: $email\n";
+                $emailBody .= "Telefon: $phone\n";
+                $emailBody .= "Katastrinumber: " . ($katastrinumber ?: 'Ei määratud') . "\n";
+                $emailBody .= "Hinnasoov: " . ($hinnasoov ?: 'Ei määratud') . "\n";
+                $emailBody .= "Lisainfo: " . ($lisainfo ?: 'Ei määratud') . "\n\n";
+                $emailBody .= "Saadetud: " . date('d.m.Y H:i:s') . "\n";
+
+                $headers = "From: " . (getenv('MAIL_FROM') ?: 'noreply@metsakohin.ee') . "\r\n";
+                $headers .= "Reply-To: $email\r\n";
+                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+                if (mail($to, $subject, $emailBody, $headers)) {
+                    $message = "Täname! Teie päring on edukalt saadetud.";
+                    $messageType = "success";
+                } else {
+                    $message = "E-kirja saatmine ebaõnnestus.";
+                    $messageType = "error";
+                }
             }
         }
+    } else {
+        $message = "Cannot connect to reCAPTCHA servers.";
+        $messageType = "error";
     }
 }
 ?>
@@ -88,11 +100,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="no-css">
 <div class="opening">
     <?php include 'header-nav.html'?>
+    <!-- DEBUG OUTPUT - REMOVE AFTER FIXING -->
+    <?php if (!empty($debugInfo)): ?>
+        <div style="background: #f0f0f0; padding: 20px; margin: 20px; border: 2px solid #ff0000; font-family: monospace; font-size: 12px; text-align: left;">
+            <h3 style="color: #ff0000;">DEBUG INFO (Remove this after fixing):</h3>
+            <?php foreach ($debugInfo as $info): ?>
+                <div><?php echo htmlspecialchars($info); ?></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
     <?php if ($message): ?>
         <div class="notification notification-<?php echo $messageType; ?>" id="notification">
             <?php echo htmlspecialchars($message); ?>
         </div>
     <?php endif; ?>
+
     <div class="opening-text">
         Küsi pakkumist
         <p>Anname vastuse esimesel võimalusel</p>
