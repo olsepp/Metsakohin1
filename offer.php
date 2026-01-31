@@ -82,8 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="script.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"></script><script src="https://www.google.com/recaptcha/api.js?render=6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"></script>    <script src="script.js"></script>
     <script src="bg-change.js"></script>
 </head>
 <body class="no-css">
