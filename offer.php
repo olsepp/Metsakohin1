@@ -136,10 +136,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <textarea id="lisainfo" name="lisainfo" placeholder="Kirjeldage lisainfot" rows="4"><?php echo $_POST['lisainfo'] ?? ''; ?></textarea>
                             <p class="field">* - kohustuslik väli</p>
                         </div>
-                        <button class="send g-recaptcha"
-                                data-sitekey="6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"
-                                data-callback='onSubmit'
-                                data-action='submit'>Saada</button>
+                        <button
+                                type="button"
+                                class="send"
+                                onclick="submitFormWithRecaptcha()">
+                            Saada
+                        </button>
                     </form>
                 </div>
             </div>
@@ -149,10 +151,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <script>
     // reCAPTCHA callback function
-    function onSubmit(token) {
-        // Add the token to the form
-        document.getElementById("offerForm").submit();
+    function submitFormWithRecaptcha() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt', {action: 'submit'})
+                .then(function(token) {
+                    document.getElementById('g-recaptcha-response').value = token;
+                    document.getElementById('offerForm').submit();
+                });
+        });
     }
+
 
     const notification = document.getElementById('notification');
     if (notification) {
