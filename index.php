@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metsakohin OU</title>
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/partners.css">
+    <title>Metsakohin OÜ - Sinu usaldusväärne partner metsanduses</title>
+    <meta name="description" content="OÜ Metsakohin on Eesti omanikele kuuluv ettevõte, mis on tegutsenud metsamajanduse valdkonnas alates 2003. aastast.">
     <link rel="icon" href="icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/design-system.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/partners.css">
     <script src="script.js"></script>
     <script src="bg-change.js"></script>
 </head>

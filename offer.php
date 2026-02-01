@@ -88,13 +88,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Küsi pakkumist - Metsakohin OÜ</title>
     <meta name="description" content="Küsige pakkumist meie pakutavate teenuste kohta.">
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/offer.css">
     <link rel="icon" href="icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js?render=6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"></script><script src="https://www.google.com/recaptcha/api.js?render=6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"></script>    <script src="script.js"></script>
+    <link rel="stylesheet" href="styles/design-system.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/offer.css">
+    <script src="https://www.google.com/recaptcha/api.js?render=6Leh38kqAAAAAFUjA-TO4BRKQqPJ2pnn2CtdkmFt"></script>
+    <script src="script.js"></script>
     <script src="bg-change.js"></script>
 </head>
 <body class="no-css">

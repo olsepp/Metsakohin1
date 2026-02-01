@@ -1,59 +1,111 @@
-// Function to check if the device is mobile
+// ============================================
+// METSAKOHIN OÜ - MODERN JAVASCRIPT
+// ============================================
+
+// Helper function to check if device is mobile
+function isMobile() {
+    return window.innerWidth <= 850;
+}
+
+// ============================================
+// HEADER SCROLL BEHAVIOR
+// ============================================
+let lastScrollTop = 0;
+const header = document.getElementById('header');
 
 window.addEventListener('scroll', function() {
-    const header = document.getElementById('header');
-
-    function isMobile() {
-        return window.innerWidth <= 850; // Adjust this threshold if necessary
-     }
-
-      if (isMobile()) {
-          header.style.backgroundColor = `rgba(46, 139, 87, 1)`;
-     }
-});
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const logo = document.getElementById('logo');
-    const initialLogoHeight = 6; // Initial max height in vw
-    const logoHeightOnMobile = 3;
-    const finalLogoHeight = 3; // Final max height in vw
-    const scrollThreshold = 350; // Scroll position for reaching final size
-
-    // Helper function to check if the device is mobile
-    function isMobile() {
-        return window.innerWidth <= 850; // Adjust the mobile breakpoint as needed
-    }
-
-    // If it's not a mobile device, apply scroll resizing logic
-    if (!isMobile()) {
-        window.addEventListener('scroll', function () {
-            const scrollY = window.scrollY;
-
-            // Calculate the new max-height based on scroll position
-            const newHeight = Math.max(finalLogoHeight, initialLogoHeight - ((scrollY / scrollThreshold) * (initialLogoHeight - finalLogoHeight)));
-            logo.style.maxHeight = `${newHeight}vw`;
-        });
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Add scrolled class for styling
+    if (scrollTop > 50) {
+        header.classList.add('scrolled');
     } else {
-        // On mobile, keep the logo size fixed and do nothing
-        logo.style.maxHeight = `${logoHeightOnMobile}rem`;  // Keep the original size
+        header.classList.remove('scrolled');
     }
+    
+    // Update scroll progress indicator
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollProgress = (scrollTop / windowHeight) * 100;
+    header.style.setProperty('--scroll-progress', `${scrollProgress}%`);
+    
+    lastScrollTop = scrollTop;
 });
 
-
+// ============================================
+// MOBILE MENU TOGGLE
+// ============================================
 document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menu-toggle");
     const navbar = document.querySelector(".navbar");
     const menuLinks = document.querySelectorAll(".navbar a");
 
-    menuToggle.addEventListener("click", () => {
-        menuToggle.classList.toggle("active");
-        navbar.classList.toggle("active");
-    });
-    menuLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            menuToggle.classList.remove("active");
-            navbar.classList.remove("active");
+    if (menuToggle && navbar) {
+        // Toggle menu
+        menuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle("active");
+            navbar.classList.toggle("active");
+            
+            // Prevent body scroll when menu is open
+            if (navbar.classList.contains("active")) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking a link
+        menuLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                menuToggle.classList.remove("active");
+                navbar.classList.remove("active");
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+            if (navbar.classList.contains("active") &&
+                !navbar.contains(e.target) &&
+                !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove("active");
+                navbar.classList.remove("active");
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && navbar.classList.contains("active")) {
+                menuToggle.classList.remove("active");
+                navbar.classList.remove("active");
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+});
+
+// ============================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
     });
 });

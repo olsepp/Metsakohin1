@@ -1,9 +1,13 @@
 
+/* ============================================
+   PARTNERS CAROUSEL
+   ============================================ */
+
 @keyframes slide {
-    from{
+    from {
         transform: translateX(0);
     }
-    to{
+    to {
         transform: translateX(-100%);
     }
 }
@@ -11,7 +15,7 @@
 .logos {
     overflow: hidden;
     padding: 60px 0;
-    background: var(--main-color);
+    background: var(--color-primary);
     white-space: nowrap;
     position: relative;
     max-width: 100%;
@@ -32,38 +36,48 @@
     height: 100%;
     content: "";
     z-index: 2;
+    pointer-events: none;
 }
-
 
 .logos:before {
     left: 0;
-    background: linear-gradient(to left, transparent, var(--white));
+    background: linear-gradient(to right, var(--color-primary) 0%, transparent 100%);
 }
 
 .logos:after {
     right: 0;
-    background: linear-gradient(to right, transparent, var(--white));
-
+    background: linear-gradient(to left, var(--color-primary) 0%, transparent 100%);
 }
 
 .logos:hover .logos-slide {
     animation-play-state: paused;
 }
 
-
 .logos-slide {
     display: inline-block;
-    animation: 20s slide infinite linear;
+    animation: 35s slide infinite linear;
 }
 
 .logos-slide a {
+    display: inline-block;
     text-decoration: none;
+    vertical-align: middle;
 }
 
 .logos-slide img {
+    display: inline-block;
     margin: 0 40px;
     height: 5rem;
+    width: auto;
+    max-width: 200px;
     padding: 0;
     border: 0;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.1);
+    transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.logos-slide a:hover img {
+    transform: scale(1.1);
 }
 
