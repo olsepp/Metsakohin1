@@ -49,10 +49,10 @@
                 </p>
                 <br>
                 <p>
-                    Oleme uhked, et alates 2016. aastast on meie tegevus tunnustatud FSC® sertifikaadiga (nr NC-FM/COC-025687), mis kinnitab meie vastutustundlikku ja säästvat lähenemist metsade majandamisel.
+                    Oleme uhked, et alates 2016. aastast on meie tegevus tunnustatud FSC® sertifikaadiga (nr PBN-FM/COC-025687), mis kinnitab meie vastutustundlikku ja säästvat lähenemist metsade majandamisel.
                 </p>
                 <img class="hor-logo" src="eee/hor_logo.jpeg" alt="">
-                <a href="cetrificate/Certificate.pdf" class="certificate" target="_blank">
+                <a href="cetrificate/Metsakohin%20OÜ%20FSC%20FM_COC%20Certificate.pdf" class="certificate" target="_blank">
                     Sertifikaat
                 </a>
             </div>
